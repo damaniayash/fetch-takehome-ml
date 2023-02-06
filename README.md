@@ -3,7 +3,7 @@
 ## Step 1:
 - Clone this repository
 - Open console/terminal/CMD and run `https://github.com/damaniayash/fetch-takehome-ml.git`
-- Once the repository has been cloned, cd/enter into this directory using `cd etch-takehome-ml`
+- Once the repository has been cloned, cd/enter into this directory using `cd fetch-takehome-ml`
 
 ## Step 2:
 - You will need a recent version of Python3 installed on your computer, if not install python from https://www.python.org/downloads/
