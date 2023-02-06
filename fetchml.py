@@ -14,7 +14,7 @@ import plotly
 from helper import *
 
 
-
+st.title('Predicting number of receipts using Linear Regression')
 st.write("Lets Import the data first")
 
 
@@ -35,7 +35,9 @@ st.pyplot(plot_regression_line(X_train, X_test, y_train, y_test, X, regressor))
 
 st.pyplot(plot_predicted_mean(X_train, X_test, y_train, y_test, regressor, df))
 
-st.pyplot(plot_monthly_sum(X_train, X_test, y_train, y_test, regressor, df))
+#st.pyplot(plot_monthly_sum(regressor, df))
+st.plotly_chart(plot_monthly_sum(regressor, df)[0], theme="streamlit", use_container_width=True)
 
+st.write(plot_monthly_sum(regressor, df)[2])
 
 

@@ -70,20 +70,21 @@ def plot_predicted_mean(X_train, X_test, y_train, y_test, regressor, df):
     plt.scatter(list(range(365,730,31)),monthly_mean,color='green')
     return fig
 
-def plot_monthly_sum(X_train, X_test, y_train, y_test, regressor, df):
+def plot_monthly_sum(regressor, df):
     monthly_mean,monthly_mean21,monthly_sum,monthly_sum21,y_pred_line = make_prediction(regressor,df)
     fig = plt.figure(figsize=(8, 6))
     plt.scatter(list(range(365,730,31)),monthly_sum,color='blue')
     plt.scatter(list(range(0,365,31)),monthly_sum21,color='red')
-    return fig
 
-    df21 = pd.DataFrame(list(range(0,365,31)), monthly_sum21).reset_index()
-    df22 = pd.DataFrame(list(range(365,730,31)), monthly_sum).reset_index()
+    df21 = pd.DataFrame(pd.date_range(start='1/1/2021', periods=12, freq='M'), monthly_sum21).reset_index()
+
+    df22 = pd.DataFrame(pd.date_range(start='1/1/2022', periods=12, freq='M'), monthly_sum).reset_index()
     df21.columns = ['value','time']
     df22.columns = ['value','time']
     fig1 = px.scatter(df21, x='time', y='value')
     fig2 = px.scatter(df22, x='time', y='value').update_traces(marker=dict(color='red'))
 
     fig = go.Figure(data = fig1.data + fig2.data)
-    st.plotly_chart(fig, theme="streamlit", use_container_width=True)
+    #st.plotly_chart(fig, theme="streamlit", use_container_width=True)
+    return fig, df21, df22
     
