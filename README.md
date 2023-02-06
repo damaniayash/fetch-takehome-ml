@@ -1,4 +1,4 @@
 # fetch-takehome-ml
 
 To run:
-streamlit run fetchml.py
+`streamlit run fetchml.py`
