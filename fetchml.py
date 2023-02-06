@@ -15,11 +15,12 @@ from helper import *
 
 
 st.title('Predicting number of receipts using Linear Regression')
-st.write("Lets Import the data first")
 
-
+st.subheader("Lets Import the data first")
 df = handle_input('data_daily.csv')
 st.write(df,use_container_width=True)
+
+st.subheader('Let us plot the data to see any visual trends')
 st.plotly_chart(plot_data(df), theme="streamlit", use_container_width=True)
 
 X_train, X_test, y_train, y_test, X, y = pre_processing(df)
