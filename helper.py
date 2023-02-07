@@ -27,6 +27,10 @@ def plot_data(df):
     fig = px.line(df,x='date',y='value',markers=True)
     return fig
 
+def plot_monthly_data(df):
+    fig = px.line(df,x='day',y='value',color='month')
+    return fig
+
 def pre_processing(df):
     X = np.array(df.Time).reshape(-1,1)
     y = np.array(df.value)

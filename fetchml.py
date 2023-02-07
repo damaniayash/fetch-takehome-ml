@@ -17,11 +17,18 @@ from helper import *
 st.title('Predicting number of receipts using Linear Regression')
 
 st.subheader("Lets Import the data first")
+st.markdown('We have added the `month`, `day of the month` and `time step` columns to help better understand the data')
 df = handle_input('data_daily.csv')
 st.write(df,use_container_width=True)
 
 st.subheader('Let us plot the data to see any visual trends')
-st.plotly_chart(plot_data(df), theme="streamlit", use_container_width=True)
+st.plotly_chart(plot_data(df), use_container_width=True)
+st.markdown(
+    'Looking at the plot we can clearly see a linear relation between the `number of scanned receipts` and `time`. \
+    We can also see daily fluctuation in the number of receipts, let us plot the month over month daily number of receiept\
+    to see if we have some sort of pattern.'
+    )
+st.plotly_chart(plot_monthly_data(df), use_container_width=True)
 
 X_train, X_test, y_train, y_test, X, y = pre_processing(df)
 
