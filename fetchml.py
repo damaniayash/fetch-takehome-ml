@@ -29,19 +29,35 @@ st.markdown(
     to see if we have some sort of pattern.'
     )
 st.plotly_chart(plot_monthly_data(df), use_container_width=True)
-
+st.markdown('Although there seems to be some relation between the same days over the month but it is not significant.\
+            We will also test to see if more more upload receipts over the weekend vs normal weekdays')
+st.plotly_chart(plot_data_weekends(df),use_container_width=True)
+st.markdown('Again, we do not visual see any trend that more people are uploading receipts on the weekends compared\
+            to week days.')
+st.subheader('Model Finalization')
+st.markdown(f'We belive that Linear Regression would best fit this data, coupled with the fact we are only expected to predict\
+            the total monthly sales for the year 2022, the daily flucuations are not that important compared to the overall\
+            linear trend. For the independent variable we cannot use date directly, so we will use time steps as \
+            the independent variable. We will make a 80/20 split for training and test samples. After training the model on\
+            the training data, we can visualize the regression line.')
 X_train, X_test, y_train, y_test, X, y = pre_processing(df)
 
 regressor = LinearRegression(learning_rate=0.000035, n_iters=1000000)
 regressor.fit(X_train, y_train)
 predictions = regressor.predict(X_test)
-accu = r2_score(y_test, predictions)
-print("Accuracy:", accu)
+
+st.markdown(f'After training, we can use the trained weights `y = m*x + b` where `m` is the weight and `b` is the bias term\
+            the values for m and b are `{regressor.weights[0]}`,`{round(regressor.bias)}`')
+# accu = r2_score(y_test, predictions)
+# st.write("Accuracy:", accu)
 
 make_prediction(regressor,df)
-st.pyplot(plot_regression_line(X_train, X_test, y_train, y_test, X, regressor))
+st.plotly_chart(plot_regression_line(X_train, X_test, y_train, y_test, X, regressor))
 
-st.pyplot(plot_predicted_mean(X_train, X_test, y_train, y_test, regressor, df))
+st.markdown('We can then extrapolate the regression line to calculate the mean of each month for the year `2022` \
+            represented by green marker')
+
+st.plotly_chart(plot_predicted_mean(X_train, X_test, y_train, y_test, X,regressor, df))
 
 #st.pyplot(plot_monthly_sum(regressor, df))
 st.plotly_chart(plot_monthly_sum(regressor, df)[0], theme="streamlit", use_container_width=True)
