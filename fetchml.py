@@ -17,7 +17,7 @@ from helper import *
 st.title('Predicting number of receipts using Linear Regression')
 
 st.subheader("Lets Import the data first")
-st.markdown('We have added the `month`, `day of the month` and `time step` columns to help better understand the data')
+st.markdown('We have added the `month`, `day of the month`,`weekend` and `time step` columns to help better understand the data')
 df = handle_input('data_daily.csv')
 st.write(df,use_container_width=True)
 
@@ -48,8 +48,7 @@ predictions = regressor.predict(X_test)
 
 st.markdown(f'After training, we can use the trained weights `y = m*x + b` where `m` is the weight and `b` is the bias term\
             the values for m and b are `{regressor.weights[0]}`,`{round(regressor.bias)}`')
-# accu = r2_score(y_test, predictions)
-# st.write("Accuracy:", accu)
+
 
 make_prediction(regressor,df)
 st.plotly_chart(plot_regression_line(X_train, X_test, y_train, y_test, X, regressor))
@@ -59,9 +58,8 @@ st.markdown('We can then extrapolate the regression line to calculate the mean o
 
 st.plotly_chart(plot_predicted_mean(X_train, X_test, y_train, y_test, X,regressor, df))
 
-#st.pyplot(plot_monthly_sum(regressor, df))
 st.plotly_chart(plot_monthly_sum(regressor, df)[0], theme="streamlit", use_container_width=True)
-
+st.subheader('Predict Total Number of scanned receipts for each monnth in 2022')
 st.write(plot_monthly_sum(regressor, df)[2])
 
 

@@ -111,5 +111,8 @@ def plot_monthly_sum(regressor, df):
 
     fig = go.Figure(data = fig1.data + fig2.data)
     #st.plotly_chart(fig, theme="streamlit", use_container_width=True)
+    del df22['time']
+    df22 = df22.style.background_gradient(axis=0)
+    
     return fig, df21, df22
     
