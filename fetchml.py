@@ -50,7 +50,7 @@ st.markdown(f'After training, we can use the trained weights `y = m*x + b` where
             the values for m and b are `{regressor.weights[0]}`,`{round(regressor.bias)}`')
 
 
-make_prediction(regressor,df)
+plot_calculations(regressor,df)
 st.plotly_chart(plot_regression_line(X_train, X_test, y_train, y_test, X, regressor))
 
 st.markdown('We can then extrapolate the regression line to calculate the mean of each month for the year `2022` \

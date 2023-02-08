@@ -66,7 +66,7 @@ def plot_regression_line(X_train, X_test, y_train, y_test, X, regressor):
     return fig
 
 
-def make_prediction(regressor,df):
+def plot_calculations(regressor,df):
     y_pred_line = regressor.predict(np.array(list(range(0,730))).reshape(-1,1))
     pred = pd.DataFrame(y_pred_line[365:730],pd.date_range(start='01/01/2022', end='31/12/2022'))
     pred = pred.reset_index()
@@ -84,7 +84,7 @@ def make_prediction(regressor,df):
     return monthly_mean,monthly_mean21,monthly_sum,monthly_sum21,y_pred_line,df21,df22
 
 # def plot_predicted_mean(X_train, X_test, y_train, y_test, X, regressor, df):
-#     monthly_mean,_,_,_,y_pred_line,_,_ = make_prediction(regressor,df)
+#     monthly_mean,_,_,_,y_pred_line,_,_ = plot_calculations(regressor,df)
 #     fig = plt.figure(figsize=(8, 6))
 #     plt.scatter(X_train, y_train)
 #     plt.scatter(X_test, y_test)
@@ -94,7 +94,7 @@ def make_prediction(regressor,df):
 
 def plot_predicted_mean(X_train, X_test, y_train, y_test, X, regressor, df):
     fig1 = plot_regression_line(X_train, X_test, y_train, y_test, X, regressor)
-    monthly_mean = make_prediction(regressor,df)[0]
+    monthly_mean = plot_calculations(regressor,df)[0]
     pred = pd.DataFrame(list(range(365,730,31)), monthly_mean).reset_index()
     pred.columns = ['value','time']
     print(pred)
@@ -105,7 +105,7 @@ def plot_predicted_mean(X_train, X_test, y_train, y_test, X, regressor, df):
 
 
 def plot_monthly_sum(regressor, df):
-    _,_,_,_,_,df21,df22 = make_prediction(regressor,df)
+    _,_,_,_,_,df21,df22 = plot_calculations(regressor,df)
     fig1 = px.scatter(df21, x='time', y='value')
     fig2 = px.scatter(df22, x='time', y='value').update_traces(marker=dict(color='red'))
 
