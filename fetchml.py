@@ -57,9 +57,10 @@ st.markdown('We can then extrapolate the regression line to calculate the mean o
             represented by green marker')
 
 st.plotly_chart(plot_predicted_mean(X_train, X_test, y_train, y_test, X,regressor, df))
-
+st.markdown(':blue[Blue Markers] are the total number of Scanned Receipts for 2021 and :red[Red Markers] are the predicted \
+            total numbers for each month in 2022')
 st.plotly_chart(plot_monthly_sum(regressor, df)[0], theme="streamlit", use_container_width=True)
-st.subheader('Predict Total Number of scanned receipts for each monnth in 2022')
+st.subheader('Prediction: Total Number of scanned receipts for each month in 2022')
 st.write(plot_monthly_sum(regressor, df)[2])
 
 
