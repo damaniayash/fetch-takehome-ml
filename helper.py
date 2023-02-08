@@ -1,16 +1,10 @@
-from linear_regression import LinearRegression
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn import datasets
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
 import plotly.express as px
 from plotly import graph_objs as go
-import plotly
+
 
 def handle_input(csv_name):
     df = pd.read_csv(csv_name)
@@ -83,14 +77,6 @@ def plot_calculations(regressor,df):
     df22 = df22[['month','value','time']]
     return monthly_mean,monthly_mean21,monthly_sum,monthly_sum21,y_pred_line,df21,df22
 
-# def plot_predicted_mean(X_train, X_test, y_train, y_test, X, regressor, df):
-#     monthly_mean,_,_,_,y_pred_line,_,_ = plot_calculations(regressor,df)
-#     fig = plt.figure(figsize=(8, 6))
-#     plt.scatter(X_train, y_train)
-#     plt.scatter(X_test, y_test)
-#     plt.plot(np.array(list(range(0,730))), y_pred_line, color="black", linewidth=2, label="Prediction")
-#     plt.scatter(list(range(365,730,31)),monthly_mean,color='green')
-#     return fig
 
 def plot_predicted_mean(X_train, X_test, y_train, y_test, X, regressor, df):
     fig1 = plot_regression_line(X_train, X_test, y_train, y_test, X, regressor)
@@ -116,3 +102,11 @@ def plot_monthly_sum(regressor, df):
     
     return fig, df21, df22
     
+# def plot_predicted_mean(X_train, X_test, y_train, y_test, X, regressor, df):
+#     monthly_mean,_,_,_,y_pred_line,_,_ = plot_calculations(regressor,df)
+#     fig = plt.figure(figsize=(8, 6))
+#     plt.scatter(X_train, y_train)
+#     plt.scatter(X_test, y_test)
+#     plt.plot(np.array(list(range(0,730))), y_pred_line, color="black", linewidth=2, label="Prediction")
+#     plt.scatter(list(range(365,730,31)),monthly_mean,color='green')
+#     return fig

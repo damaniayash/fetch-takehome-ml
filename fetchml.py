@@ -1,16 +1,5 @@
 from linear_regression import LinearRegression
 import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn import datasets
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
-import plotly.express as px
-from plotly import graph_objs as go
-import plotly
 from helper import *
 
 
@@ -40,6 +29,7 @@ st.markdown(f'We belive that Linear Regression would best fit this data, coupled
             linear trend. For the independent variable we cannot use date directly, so we will use time steps as \
             the independent variable. We will make a 80/20 split for training and test samples. After training the model on\
             the training data, we can visualize the regression line.')
+
 X_train, X_test, y_train, y_test, X, y = pre_processing(df)
 
 regressor = LinearRegression(learning_rate=0.000035, n_iters=1000000)
